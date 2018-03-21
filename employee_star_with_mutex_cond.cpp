@@ -30,6 +30,7 @@ struct employee employee_of_the_day;
 /* 赋值函数 */
 void CopyEmployee(struct employee* from, struct employee* to)
 {
+    //printf("thread id is : %ld\n", pthread_self());
     int rc;
     /* 操作互斥量 */
     rc = pthread_mutex_lock(&a_mutex);
@@ -75,7 +76,7 @@ int main()
     thr_id2 = pthread_create(&p_thread2, NULL, DoLoop, (void*)&num2);
 
     /* many many time */
-    for(int i = 0; i < 60000; i++)
+    for(int i = 0; i < 1000; i++)
     {
         CopyEmployee(&employee_of_the_day, &eotd);
         worker = &employees[eotd.number-1];
